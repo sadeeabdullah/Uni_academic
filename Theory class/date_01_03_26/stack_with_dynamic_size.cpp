@@ -1,17 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int sz = 1000;
+
+int *STACK;
 int top = -1;
-int STACK[sz];
+int sz = 2;
 
 void Push(int val){
 	if(top >= sz -1){
-		cout << "The stack is full. Pushing more element may cause overflow..\n";
-	}else{
-		STACK[++top] = val;
-	}
-}
+		int *newSTACK = new int[sz * 2];
 
+		// copy the old elements to new array
+		for (int i = 0; i < sz; ++i)
+		{
+			newSTACK[i] = STACK[i];
+		}
+
+		delete[] STACK;
+		STACK = newSTACK;
+		sz = sz*2;
+	}
+	STACK[++top] = val;
+}
 int Pop(){
 	if(top == -1){
 		cout << "The stack is empty. Removing more element may cause underflow \n";
@@ -30,8 +39,10 @@ int Peek(){
 	}
 }
 
+int main()
+{
+	STACK = new int[sz];
 
-int main(){
 	int x;	cin>>x;			// 5
 	Push(x);
 	cout << Peek() <<'\n';		// 5
