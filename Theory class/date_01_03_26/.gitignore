@@ -1,0 +1,3 @@
+#Ignore txt and exe files 
+*.txt 
+*.exe 
